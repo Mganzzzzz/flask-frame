@@ -1,15 +1,11 @@
 from flask import Flask
 from flask_migrate import Migrate, MigrateCommand
-
 from flask_script import Manager
-from werkzeug.exceptions import HTTPException
 
+from werkzeug.exceptions import HTTPException
 from exception import RestException
 from exception.server_exception import ServerException
 from models import db
-
-from models.user import User
-from models.chat import Chat
 
 from routes.index import main as routes_index
 from routes.user import main as routes_user
@@ -23,19 +19,22 @@ manager = Manager(app)
 
 @app.errorhandler(Exception)
 def allException(e):
-    log('debug e', e)
-    err = ServerException()
-    if isinstance(e, RestException):
+    err = ServerException()  # default error
+    if isinstance(e, RestException):  # restfule error
         err = e
-    elif isinstance(e, HTTPException):
-        # method not allowed ...
-        err = RestException(e.description, 1001)
+    elif isinstance(e, HTTPException):  # http error
+        exception_name = e.__class__.__name__
+        code = e.code
+        description = e.description
+        errMeg = "{}:  {}".format(exception_name, description)
+        err = RestException(errMeg, code)
     return err
+
 
 def register_routes(app):
     app.register_blueprint(routes_index)
     app.register_blueprint(routes_user, url_prefix='/user')
-    app.register_blueprint(routes_todo, url_prefix='/todo')
+    app.register_blueprint(routes_todo, url_prefix='/v1/todo')
 
 
 def configure_app():

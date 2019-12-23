@@ -1,11 +1,12 @@
-from flask import jsonify, json
+from flask import jsonify, json, request
 from werkzeug.exceptions import HTTPException
-
+from utils.utils import log
 
 class RestException(HTTPException):
     code = 200
     status_code = 500
     payload = None
+    path = '/'
     message = '未知错误'
     response = None
 
@@ -15,13 +16,15 @@ class RestException(HTTPException):
         if message is not None:
             self.message = message
         self.payload = payload
+        self.path = self.get_path()
         super(RestException, self).__init__(message, None)
 
     def get_body(self, environ=None):
         body = dict(
             code=self.status_code,
             message=self.message,
-            data=self.payload
+            data=self.payload,
+            path=self.path,
         )
         return json.dumps(body)
 
@@ -31,4 +34,9 @@ class RestException(HTTPException):
     def to_dict(self):
         rv = dict(self.payload or ())
         rv['message'] = self.message
+
         return rv
+    def get_path(self):
+        method = request.method
+        full_path = request.full_path
+        return '{}  {}'.format(method, full_path.split('?')[0])
