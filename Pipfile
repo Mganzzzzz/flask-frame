@@ -13,6 +13,8 @@ flask-script = "*"
 redis = "*"
 sqlalchemy = "*"
 python-redis = "*"
+itsdangerous = "*"
+
 gunicorn = "*"
 gevent = "*"
 wtforms = "*"

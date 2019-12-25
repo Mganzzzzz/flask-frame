@@ -1,7 +1,7 @@
 from exception import RestException
-from exception.exception_code_enum import ErrorCode
+from exception.exception_code import ErrorCode
 
 
 class AuthLoginFailed(RestException):
-    message = "not login"
+    message = "login fail"
     status_code = ErrorCode.AuthFail

@@ -1,5 +1,5 @@
 from exception import RestException
-from exception.exception_code_enum import ErrorCode
+from exception.exception_code import ErrorCode
 
 class FormValidFail(RestException):
     messages = ""

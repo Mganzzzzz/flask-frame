@@ -1,7 +1,7 @@
 from exception import RestException
 from werkzeug.exceptions import HTTPException
 from exception.auth_exception import AuthLoginFailed
-from exception.exception_code_enum import ErrorCode
+from exception.exception_code import ErrorCode
 from utils.utils import log
 
 

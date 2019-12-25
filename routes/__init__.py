@@ -19,15 +19,18 @@ import json
 
 
 def responseJson(d):
-    return dict(
+    res = dict(
         code=0,
         message='success',
         data=d,
     )
+    jsonify(res)
 
 
 def current_user():
     uid = session.get('user_id')
+    # token =
+    # request.
     print('uid', uid)
     if uid is not None:
         u = User.query.get(uid)
@@ -39,6 +42,7 @@ def login_required(f):
     def function(*args, **kwargs):
         # your code
         u = current_user()
+
         print('login required', u)
         if u is None:
             print('not login')

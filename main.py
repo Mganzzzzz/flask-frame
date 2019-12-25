@@ -19,16 +19,21 @@ manager = Manager(app)
 
 @app.errorhandler(Exception)
 def allException(e):
-    err = ServerException()  # default error
-    if isinstance(e, RestException):  # restfule error
-        err = e
-    elif isinstance(e, HTTPException):  # http error
-        exception_name = e.__class__.__name__
-        code = e.code
-        description = e.description
-        errMeg = "{}:  {}".format(exception_name, description)
-        err = RestException(errMeg, code)
-    return err
+    try:
+        err = ServerException()  # default error
+        if isinstance(e, RestException):  # restfule error
+            err = e
+        elif isinstance(e, HTTPException):  # http error
+
+            exception_name = e.__class__.__name__
+            code = e.code
+            description = e.description
+            errMeg = "{}:  {}".format(exception_name, description)
+            err = RestException(errMeg, code)
+        log('debug e', e)
+        return err
+    except ValueError:
+        print("未知异常！")
 
 
 def register_routes(app):

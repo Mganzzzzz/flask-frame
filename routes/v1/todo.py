@@ -1,8 +1,4 @@
-from werkzeug.exceptions import Forbidden, HTTPException
-
-from exception import RestException
 from exception.form_valid_fali import FormValidFail
-from exception.not_found import NotFound
 from filter import RegistrationForm
 from routes import *
 from models.user import User
@@ -17,10 +13,6 @@ Model = User
 @main.route('/all', methods=['GET'])
 @login_required
 def todo_all():
-    raise FormValidFail([
-        'a is not define',
-        'b is not define',
-    ])
     u = current_user()
     if u is not None:
         todos = Todo.todos_by_userid()

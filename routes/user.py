@@ -1,5 +1,6 @@
 from routes import *
 from models.user import User
+from utils.utils import log
 
 main = Blueprint('user', __name__)
 
@@ -53,7 +54,7 @@ def update_avatar():
 def register():
     form = request.form
     u = User(form)
-    u_valid =u.valid()
+    u_valid = u.valid()
     print(u_valid)
     if u_valid[0]:
         u.save()
@@ -64,6 +65,7 @@ def register():
     return redirect(url_for('user.profile'))
 
 
+# 登录并获取token
 @main.route('/login', methods=['POST'])
 def login():
     form = request.form
@@ -71,9 +73,13 @@ def login():
     # 检查 u 是否存在于数据库中并且 密码用户 都验证合格
     user = User.query.filter_by(username=u.username).first()
     if user is not None and user.validate_login(u):
-        print('登录成功')
+        print('登录成功', user)
+        # todo 生成token
+        token = User.gen_token(user.id)
+        log('debug token', token)
         session['user_id'] = user.id
+        r = dict(token = token.decode('ascii'))
+        return responseJson(r)
     else:
         print('登录失败')
-    # 蓝图中的 url_for 需要加上蓝图的名字，这里是 user
-    return redirect(url_for('index.index'))
+        raise AuthLoginFailed(message='登录失败 用户名密码错误')

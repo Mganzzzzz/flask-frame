@@ -1,4 +1,6 @@
+import config
 from . import *
+from itsdangerous import TimedJSONWebSignatureSerializer as Serialier
 
 
 class User(db.Model, ModelMixin):
@@ -55,3 +57,16 @@ class User(db.Model, ModelMixin):
             return True
         else:
             return False
+
+    @staticmethod
+    def gen_token(user_id, ):
+        auth_s = Serialier(config.secret_key, config.expire_time)
+        token = auth_s.dumps({"id": user_id, "name": "itsdangerous"})
+        return token
+
+    @staticmethod
+    def auth_token(token):
+        auth_s = Serialier(config.secret_key, config.expire_time)
+        data = auth_s.loads(token)
+        return
+        # itsdangerous
