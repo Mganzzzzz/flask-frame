@@ -24,7 +24,8 @@ def responseJson(d):
         message='success',
         data=d,
     )
-    jsonify(res)
+    print('debug res', res)
+    return jsonify(res)
 
 
 def current_user():
