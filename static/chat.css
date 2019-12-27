@@ -1,0 +1,45 @@
+.rc-full-width {
+    width: 90%;
+}
+
+.rc-left {
+    float: left;
+    width: 100px;
+}
+
+.rc-channel {
+    display: block;
+    padding-left: 20px;
+    font-size: 20px;
+}
+.active {
+    background: red;
+}
+
+.rc-main {
+    height: 100%
+}
+
+#id-div-chats {
+    /*background: red;*/
+    height: 100%;
+    padding: 10px 10px 115px 10px;
+    overflow-y: scroll;
+}
+
+.rc-input {
+    /*height: 200px;*/
+    position: fixed;
+    bottom: 0px;
+    left: 100px;
+}
+.avatar-transform {
+    -moz-transform:scaleY(-1);
+    -webkit-transform:scaleY(-1);
+    -o-transform:scaleY(-1);
+    transform:scaleY(-1);
+    filter:FlipV;
+}
+#id-div-channels {
+    display: none;
+}

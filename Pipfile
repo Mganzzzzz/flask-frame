@@ -1,0 +1,23 @@
+[[source]]
+url = "https://pypi.tuna.tsinghua.edu.cn/simple/"
+verify_ssl = true
+name = "pypi"
+
+[dev-packages]
+
+[packages]
+flask = "*"
+numpy = "*"
+flask-migrate = "*"
+flask-script = "*"
+redis = "*"
+sqlalchemy = "*"
+python-redis = "*"
+itsdangerous = "*"
+
+gunicorn = "*"
+gevent = "*"
+wtforms = "*"
+
+[requires]
+python_version = "3.7"

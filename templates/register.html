@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+    <meta charset="UTF-8">
+    <title>Register</title>
+    <link rel="stylesheet" href="/static/drrr.css">
+    <link rel="stylesheet" href="/static/chat.css">
+</head>
+<body>
+    <div id="body">
+
+        <div class="home-wrap">
+
+            <div class="logo-wrapper">
+                <div class="login-logo front"></div>
+                <div class="login-logo back"></div>
+            </div>
+
+            <form action="/user/register" method="post">
+                <div class="login-form field" id="t_form">
+                    <div class="home-name">
+                        <label for="form-name">Username:</label>
+                        <input type="text" name="username" size="10" maxlength="40" minlength="3" class="home-name-input" required="" autocomplete="on">
+                    </div>
+                    <div class="home-name">
+                        <label for="form-name">password:</label>
+                        <input type="text" name="password" size="10" maxlength="40" minlength="3" class="home-name-input" required="" autocomplete="on">
+                    </div>
+
+                    <p class="text-center">
+                        <a href="/user/login_view" class="needsclick">已有账号，立即登录</a>
+                    </p>
+
+                    <div class="home-submit">
+                        <input type="submit" name="login" value="REGISTER!" class="submit-input home-submit-input">
+                    </div>
+                </div>
+
+          </form>
+
+          <div class="home-meta">
+              <p>
+                  <a href="#">
+                      <span class="project-dollars sm inline" title="© 三千院夜 @ Project DOLLARS 製作委員会"></span>
+                  </a>
+              </p>
+          </div>
+
+        </div>
+    </div>
+
+</body>
+</html>
